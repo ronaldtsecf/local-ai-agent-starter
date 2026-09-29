@@ -1,0 +1,9 @@
+# 唔應該備份上 GitHub 嘅嘢
+.env
+.env.*
+*.key
+*.pem
+credentials*
+secrets*
+sensitive/
+.DS_Store
