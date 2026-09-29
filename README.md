@@ -111,8 +111,6 @@ https://github.com/ronaldtsecf/local-ai-agent-starter
 
 ---
 
-## 靈感同授權
-
-呢個包嘅做法，源自「AI 嘅記憶應該住喺自己部電腦」呢個近年喺 AI Agent 圈子日漸普遍嘅想法。啟發過我嘅其中一個來源係雷蒙三十（侯智薰）嘅《超級 AI 個體》課程。本包所有文字、範本同例子，均為我用自己真實嘅工作系統重寫，冇搬用課程原文。
+## 授權
 
 本包以 [CC BY 4.0](LICENSE.md) 授權：你可以自由使用、修改、商用，只需要註明出處（Ronald Tse，@ronald.tcf）。

@@ -94,7 +94,7 @@ my-agent/
 5. 喺 `MEMORY.md` 加第一條：用戶嘅基本背景（一句）。
 6. 喺 `HANDOFF.md` 寫第一份交接：「今日起咗本機 AI 分身；下一步係做接手測試同備份」。
 
-**點驗證成功：** 搜尋 `AGENTS.md` 內冇剩低 `【填】`（`grep -n "【填】" ~/my-agent/AGENTS.md` 冇輸出）。
+**點驗證成功：** 搜尋 `AGENTS.md` 內冇剩低 `【填` 開頭嘅空位（`grep -n "【填" ~/my-agent/AGENTS.md` 冇輸出）。
 
 ---
 
