@@ -12,17 +12,25 @@
 
 ## 三十秒講明呢個包係咩
 
-- **免費。** 你要先有 [Claude Code](https://claude.com/claude-code) 或者 Codex 其中一樣。兩樣都有更好。
+- **呢個包本身免費。** 你要先有 [Claude Code](https://claude.com/claude-code) 或者 Codex 其中一樣（兩間公司嘅訂閱要另計）。兩樣都有更好。
 - **十五至二十分鐘**，全程對話式。你將呢個 repo 嘅連結掉俾 AI，講一句「開始」，AI 會逐條問你問題，然後幫你起好個資料夾。
-- 做完你會攞到**四樣嘢**：
-  1. 一個屬於你嘅 AI 分身資料夾（有規矩、有記憶、有交接冊）
+- 做完你會攞到**五樣**：
+  1. 一個屬於你嘅 AI 分身資料夾（有規矩、有記憶）
   2. 一份寫俾 AI 睇、亦寫俾你睇嘅 `AGENTS.md`（你同 AI 嘅合作守則）
-  3. 一次「換 AI 接手」測試，證明換咗另一隻 AI，佢都讀得明你個資料夾
-  4. 一個私人 GitHub 備份，部電腦壞咗都唔怕
+  3. 一本交接冊 `HANDOFF.md`（換 AI 時，新 AI 睇呢份就接得手）
+  4. 一次「換 AI 接手」測試，證明換咗另一隻 AI，佢都讀得明你個資料夾
+  5. 一個私人 GitHub 備份，部電腦壞咗都唔怕
 
 **啱邊個？** 已經日日用 AI 做嘢、但唔寫程式嘅專業人士、老闆、老師、自僱人士。
 
-**未用過 Claude Code 或 Codex？** 呢個包假設你已經裝好。快速檢查：開 Terminal，打 `claude` 或者 `codex`，見到 AI 應你就得。
+**你需要先有（開始前檢查一次）：**
+
+| 要有 | 點檢查 | 冇嘅話 |
+| --- | --- | --- |
+| Claude Code 或 Codex | 開 Terminal，打 `claude` 或 `codex`，見到 AI 應你 | 呢個包假設你已經裝好，先去官方裝 |
+| Mac（Linux、Windows 嘅 WSL 都得） | — | Windows 原生（PowerShell）未測，可能行唔通 |
+| 網絡 | — | 下載本包同備份都要連網 |
+| `git`、`gh`（GitHub 指令工具）、GitHub 帳號 | 打 `git --version`、`gh --version` | **只係第 5 步備份先要**。冇都可以先做前 4 步，AI 會提你 |
 
 ---
 
@@ -78,13 +86,13 @@ AI 都一樣。
 https://github.com/ronaldtsecf/local-ai-agent-starter
 
 重點：
-1. 完整讀 SETUP.md 先開始，唔好跳步。
+1. 先用 `git clone` 將呢個 repo 下載去我電腦（例如 ~/local-ai-agent-starter），再完整讀入面嘅 SETUP.md 先開始，唔好跳步。
 2. 每一步做之前，用日常廣東話講你要做咩、點解，等我講「好」先做。
 3. 需要我作決定嘅嘢，逐條問我，講清楚你推薦邊個同原因。
 4. 唔准將密碼、API key、學生或客人嘅個人資料寫入資料夾或者推上 GitHub。
 ```
 
-（如果你已經 clone 咗個 repo 落電腦，喺該資料夾開 AI，講「跟 SETUP.md 開始」就得。）
+（如果你已經 clone 咗個 repo 落電腦，喺該資料夾開 AI，講「跟 SETUP.md 開始」就得。冇 git 嘅話，去 repo 頁面撳 Code → Download ZIP，解壓後喺該資料夾開 AI。）
 
 ---
 
@@ -98,13 +106,13 @@ https://github.com/ronaldtsecf/local-ai-agent-starter
 | [docs/handoff-test.md](docs/handoff-test.md) | 你＋AI | 換 AI 接手測試點做、點睇結果 |
 | [docs/restore.md](docs/restore.md) | 你 | 帳號出事後，逐步復活嘅 SOP |
 | [docs/backup.md](docs/backup.md) | 你＋AI | 私人 GitHub 備份，同備份前要檢查咩 |
-| [scripts/check-secrets.sh](scripts/check-secrets.sh) | AI 跑 | 推上 GitHub 前，掃有冇密碼同個人資料 |
+| [scripts/check-secrets.sh](scripts/check-secrets.sh) | AI 跑 | 推上 GitHub 前，掃有冇明顯嘅密碼同個人資料（基本檢查，唔等於安全） |
 
 ---
 
 ## 私隱同安全
 
-- 全程喺你部機做，呢個包**唔會**將你嘅資料傳去任何地方。
+- 呢個包本身唔會將你嘅資料傳去任何地方。你用嘅 AI 工具（Claude Code、Codex）同你揀嘅 GitHub 私人備份，就要跟返佢哋自己嘅規則。
 - 備份只用**私人（Private）** GitHub repo。
 - 密碼、API key、Token 放密碼管理器，**唔好放入資料夾**。
 - 學生、客人、員工嘅個人資料，唔好放入 AI 分身資料夾；有需要就只放去識別化嘅摘要。

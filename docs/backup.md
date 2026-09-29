@@ -15,15 +15,16 @@ GitHub 唔會自動包含：未提交嘅檔案、被 `.gitignore` 排除嘅檔�
 
 ## 備份前檢查（每次推之前）
 
-1. 跑檢查腳本：
+1. 跑檢查腳本（起資料夾時已經複製咗一份入你嘅資料夾）：
 
    ```bash
-   ./scripts/check-secrets.sh ~/my-agent
+   cd ~/my-agent && ./scripts/check-secrets.sh .
    ```
 
-   有警告就處理，冇警告先繼續。
+   有警告就處理。腳本只顯示檔名同行數，唔顯示密碼內容。
+   **冇警告唔等於安全**：腳本只掃文字檔，掃唔到 PDF、Excel、Word，亦唔識中文人名或成績。列出嚟嘅檔案要你人手睇。
 2. 確認 repo 係私人：`gh repo view my-agent --json visibility --jq .visibility` 顯示 `PRIVATE`。
-3. 睇一眼 `git status`，確認冇唔應該入嘅檔案。
+3. 睇 `git status` 同 `git diff --cached`，確認冇唔應該入嘅檔案。呢步係最後一關，唔好跳。
 
 ## 幾時備份
 
