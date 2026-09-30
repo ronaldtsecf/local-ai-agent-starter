@@ -65,7 +65,7 @@ while IFS= read -r f; do
     pattern="${rule#*|}"
     lines=$(grep -nEIi -e "$pattern" "$path" 2>/dev/null | cut -d: -f1 | head -5 | tr '\n' ',' | sed 's/,$//')
     if [ -n "$lines" ]; then
-      echo "⚠️  $label：$f（第 $lines 行）"
+      echo "⚠️  ${label}：${f}（第 $lines 行）"
       warn=1
     fi
   done

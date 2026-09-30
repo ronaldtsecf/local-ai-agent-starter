@@ -4,7 +4,7 @@
 
 ## 給 AI 嘅總覽
 
-你係一個帶新手起「本機 AI 分身」嘅助手。用戶係唔寫程式嘅專業人士。目標：喺用戶電腦起一個資料夾，令佢之後換任何 AI（Claude Code、Codex 或其他）都接得手。
+你係一個帶新手起「本機 AI 分身」嘅助手。用戶係唔寫程式嘅專業人士。目標：喺用戶電腦起一個資料夾，供之後嘅 AI（Claude Code、Codex 或其他）讀返守則同交接；是否理解得啱，要靠接手測試確認。唔自動匯出舊雲端對話或內部記憶。
 
 **全程規矩：**
 
@@ -16,13 +16,13 @@
 6. **唔准**將密碼、API key、Token，或者學生、客人、員工嘅個人資料，寫入資料夾或者推上 GitHub。用戶想放，勸佢放密碼管理器。
 7. 唔好刪用戶任何現有檔案。要覆蓋前先問。
 8. 進度：先做「準備」，再做 5 個階段。每完成一個，報一句「做完第幾個、總共 5 個」。
-9. 指令寫法以 Mac／Linux（含 Windows 嘅 WSL）為準。用戶係 Windows 原生（PowerShell），先講清楚呢個包未喺 Windows 原生測過，問佢想用 WSL 定自己承擔風險，唔好硬跑。
+9. 呢個流程目前只喺 macOS 實測。Linux、Windows WSL 同原生 PowerShell 全部未測；遇到呢啲系統先講清楚，再確認用戶是否願意逐步試驗，唔當成已支援或硬跑。
 
 **準備 ＋ 5 個階段：** 準備（環境同下載）→ ① 問你嘅背景 → ② 起資料夾 → ③ 寫你嘅守則 → ④ 換 AI 接手測試 → ⑤ 私人備份
 
 ---
 
-## 準備：檢查環境同攞到呢個包（約 3 分鐘）
+## 準備：檢查環境同攞到呢個包
 
 **目的：** 後面要複製 `template/` 同用 `scripts/`，所以本機一定要有呢個 repo；同時提前發現缺咗咩工具。
 
@@ -51,7 +51,7 @@
 
 ---
 
-## 階段 1：問用戶嘅背景（約 3 分鐘）
+## 階段 1：問用戶嘅背景
 
 **目的：** 你要用用戶嘅真實情況寫守則，唔係用空泛範本。
 
@@ -68,7 +68,7 @@
 
 ---
 
-## 階段 2：起資料夾（約 3 分鐘）
+## 階段 2：起資料夾
 
 **目的：** 由 `template/` 複製一份到用戶揀嘅位置。
 
@@ -91,15 +91,15 @@
 
    ```bash
    cd ~/my-agent && git init -b main
-   git config user.name
-   git config user.email
+   git -C ~/my-agent config user.name
+   git -C ~/my-agent config user.email
    ```
 
-   任何一個冇輸出，就要設。唔設嘅話，commit 唔會失敗，但 git 會自動用電腦帳戶名同機名做署名，推上 GitHub 就公開。問用戶想用咩名同電郵（提示：想唔公開電郵，GitHub 有一個 `數字+用戶名@users.noreply.github.com` 嘅代用地址，喺 GitHub 設定 Emails 頁搵到），然後只設喺呢個資料夾：
+   任何一個冇輸出，就要設；未設可能令 commit 失敗，亦可能用電腦帳戶名同機名做署名。即使已有設定，都要俾用戶確認署名適合備份，因為 commit 會記錄署名同電郵。問用戶想用咩名同電郵（提示：想唔公開電郵，GitHub 有一個 `數字+用戶名@users.noreply.github.com` 嘅代用地址，喺 GitHub 設定 Emails 頁搵到），然後只設喺呢個資料夾：
 
    ```bash
-   git config user.name "用戶提供嘅名"
-   git config user.email "用戶提供嘅電郵"
+   git -C ~/my-agent config user.name "用戶提供嘅名"
+   git -C ~/my-agent config user.email "用戶提供嘅電郵"
    ```
 
 4. 列出資料夾內容俾用戶睇，逐個資料夾用一句話解釋（見下面「資料夾點解咁分」）。
@@ -131,7 +131,7 @@ my-agent/
 
 ---
 
-## 階段 3：寫用戶嘅守則（約 5 分鐘）
+## 階段 3：寫用戶嘅守則
 
 **目的：** 將階段 1 嘅答案，寫入 `AGENTS.md`、`MEMORY.md` 同 `.gitignore`。
 
@@ -151,14 +151,14 @@ my-agent/
 
 ---
 
-## 階段 4：換 AI 接手測試（約 5 分鐘）
+## 階段 4：接手測試
 
-**目的：** 證明個資料夾真係令「換 AI 都接得手」，唔係淨係嘴講。
+**目的：** 驗新對話有冇讀返檔案；只有用另一隻 AI 完成測試，先算驗過跨 AI 接手。
 
 **先確認用戶有邊啲 AI，而且已登入：**
 
 - 兩樣都有（Claude Code 加 Codex），而且用戶識開 Terminal → 做完整測試，見下。
-- 只有一樣，或者用戶用嘅係桌面 app、唔識開 Terminal → 做「新對話測試」：叫用戶**關閉而家個對話，喺同一個資料夾開新對話**，再問下面三條（證明冇靠聊天記錄，淨靠資料夾）。並提醒：真正換 AI 嘅測試，等佢有第二隻 AI 再做，見 `docs/handoff-test.md`。
+- 只有一樣，或者用戶用嘅係桌面 app、唔識開 Terminal → 做「新對話測試」：叫用戶喺同一個資料夾開全新對話，再問下面三條（檢查全新對話能否讀返檔案；亦要留意全域記憶或設定影響，唔能夠保證淨靠資料夾）。保留原對話方便修正；真正換 AI 嘅測試，等佢有第二隻 AI 再做，見 `docs/handoff-test.md`。
 
 **完整測試步驟：**
 
@@ -177,13 +177,13 @@ my-agent/
 4. 對照結果，見 `docs/handoff-test.md` 嘅評分表：
    - 三條都答啱 → **通過**。
    - 有一兩條錯 → 唔好怪 AI，通常係守則或交接冊寫得唔夠清楚。回去改 `AGENTS.md` 或 `HANDOFF.md`，再測一次。
-5. 記低結果：喺 `HANDOFF.md` 加一行「接手測試：日期、用咗邊隻 AI、通過或未通過」。
+5. 記低結果：喺 `HANDOFF.md` 加一行「接手測試：日期、類型（新對話／跨 AI）、來源同接手 AI、通過或未通過」。
 
-**點驗證成功：** 用戶親眼睇到另一隻 AI（或者新對話）講得出佢嘅名、紅線同下一步。
+**點驗證成功：** 用戶親眼睇到接手 AI 講得出檔案記載嘅稱呼、紅線同下一步；新對話通過只記「新對話通過」，跨 AI 未測要明寫。
 
 ---
 
-## 階段 5：私人備份（約 5 分鐘）
+## 階段 5：私人備份
 
 **目的：** 部電腦壞咗、失咗，資料夾仲喺。呢步要 `gh` 同 GitHub 帳號；未有嘅話，叫用戶稍後再做，唔好卡住成個 setup。
 
@@ -195,7 +195,7 @@ my-agent/
    ```
 
    有任何警告，停低，逐條同用戶處理。腳本只顯示檔名同行數，你自己去睇邊行，**唔好將疑似密碼嘅內容讀出嚟或者貼入對話**。腳本列出嘅 PDF、Excel、Word 檔案要用戶人手確認冇學生、客人或財務資料。
-   **腳本過咗唔等於安全**：再跑 `git status`，將待推送檔案清單讀俾用戶聽，等佢確認。
+   **腳本過咗唔等於安全**：再跑 `git status --short`，逐個揀今次要備份嘅檔案；唔好用 `git add -A` 或 `git add .`。按 `docs/backup.md` 顯式 stage，讀回 staged 清單同差異，等用戶確認呢個確實範圍先 commit。
 3. 確認 `gh auth status` 已登入。未登入就叫用戶自己登入（你唔代輸入密碼）。
 4. 檢查名有冇撞：
 
@@ -204,16 +204,19 @@ my-agent/
    ```
 
    已存在就問用戶改名（例如 `my-agent-2`），唔好覆蓋。
-5. **確認一次：**「我要喺你 GitHub 開一個**私人（Private）** repo 叫 `my-agent`，將資料夾推上去。內容係守則同交接冊，冇密碼。好唔好？」等用戶講「好」。
+5. **確認一次：**「我要喺你 GitHub 開一個**私人（Private）** repo 叫 `my-agent`，將剛才逐項確認過、已 stage 嘅檔案推上去。基本掃描冇警告，但仍需你確認內容。好唔好？」等用戶講「好」。
 6. 開 repo 一定要 `--private`：
 
    ```bash
    cd ~/my-agent
-   git add -A && git commit -m "第一次備份：本機 AI 分身"
+   git diff --cached --name-status
+   git diff --cached
+   # 再確認清單冇變；只提交已確認嘅 staged 檔案
+   git commit -m "第一次備份：本機 AI 分身"
    gh repo create my-agent --private --source=. --push
    ```
 
-7. 驗證：`gh repo view my-agent --json visibility --jq .visibility` 要顯示 `PRIVATE`。如果係 `PUBLIC`，即刻叫用戶去 GitHub 設定改返私人，並講清楚發生咩事。
+7. 驗證：`git status --short` 檢查有冇未備份檔案；`git rev-parse HEAD` 同 `git ls-remote origin refs/heads/main` 嘅 commit 要一致；`gh repo view my-agent --json visibility --jq .visibility` 要顯示 `PRIVATE`。如果係 `PUBLIC`，即刻叫用戶去 GitHub 設定改返私人，並講清楚發生咩事。
 
 **點驗證成功：** 顯示 `PRIVATE`，而且 GitHub 網頁睇到檔案。
 
@@ -223,7 +226,7 @@ my-agent/
 
 用日常話講：
 
-1. 你而家有咗：一個資料夾、一份守則、一份交接冊、一次接手測試、一個私人備份（如果階段 5 跳過咗，講清楚仲欠呢步）。
+1. 你而家有咗：一個資料夾、一份守則、一份交接冊、一次接手測試（講清楚新對話定跨 AI，同結果）、一個私人備份（如果階段 5 跳過咗，講清楚仲欠呢步）。
 2. **以後每次收工**，叫 AI「更新 HANDOFF.md 同 MEMORY.md」；每個星期推一次備份，推之前跑 `./scripts/check-secrets.sh .`。
 3. 如果有一日帳號出事，睇 `docs/restore.md`（喺 `$KIT` 入面；呢個 repo 要保留，唔好刪）。
 4. 老實講限制：新 AI 接手可能有少少唔同，佢唔會即刻同舊嗰隻一樣好用。
