@@ -35,7 +35,7 @@ cd ~/my-agent
 ## 第 4 步：電腦都壞咗
 
 1. 喺新電腦裝好 AI 工具。
-2. 由你嘅私人 GitHub 攞返資料夾。要先有 `gh`（GitHub 指令工具，Mac 可以用 `brew install gh` 安裝）：
+2. 由你嘅私人 GitHub 攞返資料夾。要先有 `gh`（GitHub 指令工具，去 https://cli.github.com 下載 Mac 安裝檔）：
 
    ```bash
    gh auth login        # 你自己登入

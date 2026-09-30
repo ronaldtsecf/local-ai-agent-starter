@@ -13,7 +13,7 @@
 ## 三十秒講明呢個包係咩
 
 - **呢個包本身免費。** 你要先有 [Claude Code](https://claude.com/claude-code) 或者 Codex 其中一樣（兩間公司嘅訂閱要另計）。兩樣都有更好。
-- **十五至二十分鐘**，全程對話式。你將呢個 repo 嘅連結掉俾 AI，講一句「開始」，AI 會逐條問你問題，然後幫你起好個資料夾。
+- **約二十五分鐘**，全程對話式。你將呢個 repo 嘅連結掉俾 AI，講一句「開始」，AI 會逐條問你問題，然後幫你起好個資料夾。
 - 做完你會攞到**五樣**：
   1. 一個屬於你嘅 AI 分身資料夾（有規矩、有記憶）
   2. 一份寫俾 AI 睇、亦寫俾你睇嘅 `AGENTS.md`（你同 AI 嘅合作守則）
@@ -30,7 +30,8 @@
 | Claude Code 或 Codex | 開 Terminal，打 `claude` 或 `codex`，見到 AI 應你 | 呢個包假設你已經裝好，先去官方裝 |
 | Mac（Linux、Windows 嘅 WSL 都得） | — | Windows 原生（PowerShell）未測，可能行唔通 |
 | 網絡 | — | 下載本包同備份都要連網 |
-| `git`、`gh`（GitHub 指令工具）、GitHub 帳號 | 打 `git --version`、`gh --version` | **只係第 5 步備份先要**。冇都可以先做前 4 步，AI 會提你 |
+| `git` | 打 `git --version` | Mac 會彈出安裝視窗，撳「安裝」等幾分鐘 |
+| `gh`（GitHub 指令工具）、GitHub 帳號 | 打 `gh --version` | **只係第 5 步備份先要**。冇都可以先做前 4 步，AI 會提你 |
 
 ---
 

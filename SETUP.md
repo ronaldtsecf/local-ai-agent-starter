@@ -35,10 +35,10 @@
    ```
 
    - `git` 冇裝：Mac 第一次打 `git` 會彈出安裝視窗，叫用戶撳「安裝」並等佢完成（幾分鐘）。
-   - `gh`（GitHub 指令工具）冇裝：**唔好卡住**。階段 1 至 4 唔使用到，可以照做；只係階段 5 要用。同用戶講清楚，並提議 Mac 用 `brew install gh`（用戶同意先跑）。
+   - `gh`（GitHub 指令工具）冇裝：**唔好卡住**。階段 1 至 4 唔使用到，可以照做；只係階段 5 要用。同用戶講清楚，並叫用戶去 https://cli.github.com 下載 Mac 安裝檔（唔使 Homebrew）。**唔好幫用戶裝 Homebrew**，好多新 Mac 冇，而且要密碼同時間。
    - `gh auth status` 未登入：階段 5 先叫用戶自己登入，你唔代輸入密碼。
    - 用戶冇 GitHub 帳號：階段 5 前叫佢自己去 github.com 開一個，你做唔到。
-2. 確認呢個包喺邊。如果你而家就喺呢個 repo 資料夾入面（見到 `SETUP.md` 同 `template/`），就將呢個位置記低做 `KIT`。否則下載到用戶主資料夾：
+2. 確認呢個包喺邊。如果你而家就喺呢個 repo 資料夾入面（見到 `SETUP.md` 同 `template/`），就將呢個位置記低做 `KIT`。**下面指令入面嘅 `$KIT` 同 `~/my-agent`，你每次跑都要代入實際嘅絕對路徑**（每條指令係獨立 shell，變數唔會記住）。資料夾名唔好有空格。否則下載到用戶主資料夾：
 
    ```bash
    git clone https://github.com/ronaldtsecf/local-ai-agent-starter ~/local-ai-agent-starter
@@ -78,13 +78,13 @@
    test -e ~/my-agent && echo "已存在，停" || echo "未存在，可以繼續"
    ```
 
-   已存在就停低問用戶：換個名，定用佢個現有資料夾（你要逐個檔案問先覆蓋）。**唔好用 `cp -R` 對住已存在嘅資料夾，佢會靜靜覆蓋同名檔案。**
+   已存在就停低問用戶：換個名，定用佢個現有資料夾（你要逐個檔案問先覆蓋）。**唔好用 `cp -R` 對住已存在嘅資料夾，佢會喺入面再夾出一個 `template` 子夾，搞亂結構。**
 2. 複製範本，同時複製備份檢查腳本：
 
    ```bash
-   cp -R "$KIT/template" ~/my-agent
-   mkdir -p ~/my-agent/scripts
-   cp "$KIT/scripts/check-secrets.sh" ~/my-agent/scripts/
+   cp -R "$KIT/template" "$HOME/my-agent"
+   mkdir -p "$HOME/my-agent/scripts"
+   cp "$KIT/scripts/check-secrets.sh" "$HOME/my-agent/scripts/"
    ```
 
 3. 初始化 git，並確認有署名（冇署名嘅話，最尾 commit 一步會失敗）：
@@ -95,7 +95,7 @@
    git config user.email
    ```
 
-   任何一個冇輸出，就問用戶想用咩名同電郵（提示：想唔公開電郵，GitHub 有一個 `數字+用戶名@users.noreply.github.com` 嘅代用地址，喺 GitHub 設定 Emails 頁搵到），然後只設喺呢個資料夾：
+   任何一個冇輸出，就要設。唔設嘅話，commit 唔會失敗，但 git 會自動用電腦帳戶名同機名做署名，推上 GitHub 就公開。問用戶想用咩名同電郵（提示：想唔公開電郵，GitHub 有一個 `數字+用戶名@users.noreply.github.com` 嘅代用地址，喺 GitHub 設定 Emails 頁搵到），然後只設喺呢個資料夾：
 
    ```bash
    git config user.name "用戶提供嘅名"
